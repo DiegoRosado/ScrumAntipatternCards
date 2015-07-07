@@ -1,10 +1,13 @@
 package com.codeheroes.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,13 +19,16 @@ public class DisplayCardActivity extends AppCompatActivity {
 
     // Attributes
     private String cardName;
+    private Context context = null;
 
 
     // Methods
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_card);
+        context = this;
 
         // Get message from the intent
         Intent intent = getIntent();
@@ -35,8 +41,18 @@ public class DisplayCardActivity extends AppCompatActivity {
         imageView.setImageDrawable(drawableCardImage);
 
         // Add onTouchListener
-        DisplayCardTouchListener onTouchListener = new DisplayCardTouchListener();
-        imageView.setOnTouchListener(onTouchListener);
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                // Load Markdown activity and start it
+                Intent markdownActivity;
+                markdownActivity = new Intent(context, DisplayMarkdownActivity.class);
+                markdownActivity.putExtra(MainActivity.CARD_NAME, cardName);
+                startActivity(markdownActivity);
+                return false;
+            }
+
+        });
 
 
 /*        // Create text view
