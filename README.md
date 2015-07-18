@@ -30,4 +30,4 @@ Adding new cards is pretty easy.
 All cards are loaded as assets in image and markdown format.
 
 ## Credits
-Pictures got from [www.freepik.com](www.freepik.com)
+Pictures got from [www.freepik.com](http://www.freepik.com)
